@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { COLORS } from '../../constants'
 import { useFetch } from '../../hooks/useFetch'
+import HomeHeader from '../../components/HomeComponents/header'
+import SearchInitializer from '../../components/HomeComponents/searchInit'
 
 const HomeScreen = () => {
   const { generes, nowPlayingMovies, upcomingMovies, topRatedMovies, popularMovies } = useFetch();
@@ -13,9 +15,10 @@ const HomeScreen = () => {
     generes, topRatedMovies
   ])
   return (
-    <View style={{ flex: 1, backgroundColor: COLORS.primary }}>
-      <Text>HomeScreen</Text>
-    </View>
+    <ScrollView style={{ flex: 1, backgroundColor: COLORS.primary }}>
+      <HomeHeader />
+      <SearchInitializer />
+    </ScrollView>
   )
 }
 

@@ -25,6 +25,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Navigation from './src/navigation';
+import { COLORS } from './src/constants';
 
 
 function App(): JSX.Element {
@@ -36,6 +37,7 @@ function App(): JSX.Element {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor={COLORS.primary}/>
       <Navigation />
     </View>
   );
