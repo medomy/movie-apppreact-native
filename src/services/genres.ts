@@ -10,8 +10,8 @@ class GenresNetwork {
                     language: "en-US"
                 }
             })
-            await AsyncStorageCache.cacheGenres(generesData.data);
-            return generesData.data;
+            await AsyncStorageCache.cacheGenres(generesData.data.genres);
+            return generesData.data.genres;
         } catch (err) {
             throw new Error(`Could not retrieve generes from db , ${err}`)
         }
