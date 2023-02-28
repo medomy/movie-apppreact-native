@@ -5,5 +5,11 @@ class Utils {
         if (!genreId) return movies;
         return movies.filter((movie) => movie.genre_ids.includes(genreId));
     }
+
+    // get if movie is added to favourites
+
+    static isAddedToWatchList(movies_ids: number[], id: number) {
+        return movies_ids.includes(id);
+    }
 }
 export default Utils;

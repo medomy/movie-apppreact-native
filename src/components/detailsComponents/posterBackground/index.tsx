@@ -1,9 +1,14 @@
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { COLORS, SIZES, images } from '../../../constants'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
 import { BlurView } from '@react-native-community/blur'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../../store'
+import Utils from '../../../utils/filterMovies'
+import { addToList, removeFromList, setList } from '../../../store/toWatchSlice'
+import AsyncStorageCache from '../../../services/asyncstorageCache'
 // try to understand blurView more in the future...
 
 type props = {
@@ -12,6 +17,30 @@ type props = {
 }
 const PosterBackground = ({ imgPath, movieId }: props) => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+    const favs_ids = useSelector((state: RootState) => state.toWatch.toWatchIds);
+
+    const addOrRemoveTowatch = useCallback(async () => {
+        try {
+            console.log(movieId);
+            // dispatch(setList([]));
+            // await AsyncStorageCache.setToWatchMoviesAsyncStorage([]);
+            if (!Utils.isAddedToWatchList(favs_ids, movieId)) {
+                dispatch(addToList(movieId));
+                //await AsyncStorageCache.setToWatchMoviesAsyncStorage(favs_ids);
+                console.log("added", favs_ids);
+            }
+            else {
+                dispatch(removeFromList(movieId));
+                //await AsyncStorageCache.setToWatchMoviesAsyncStorage(favs_ids);
+                console.log("removed", favs_ids);
+
+            }
+        } catch (err) {
+            console.warn(err);
+        }
+    }, [favs_ids]);
+
     return (
         <ImageBackground
             source={imgPath ? { uri: `https://image.tmdb.org/t/p/w500/${imgPath}` } : images.movie_pic}
@@ -26,13 +55,15 @@ const PosterBackground = ({ imgPath, movieId }: props) => {
                         blurRadius={25} />
                     <Icon name='ios-close-circle-outline' size={1.5 * SIZES.iconSize2} color={COLORS.white} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.iconCircle}>
+                <TouchableOpacity style={styles.iconCircle} onPress={addOrRemoveTowatch}>
                     <BlurView
                         blurType='light'
                         blurAmount={40}
                         blurRadius={25}
                         reducedTransparencyFallbackColor="white" />
-                    <Icon name='bookmark-outline' size={1.5 * SIZES.iconSize2} color={COLORS.white} />
+                    {Utils.isAddedToWatchList(favs_ids, movieId) ?
+                        <Icon name='bookmark' size={1.5 * SIZES.iconSize2} color={COLORS.white} /> :
+                        <Icon name='bookmark-outline' size={1.5 * SIZES.iconSize2} color={COLORS.white} />}
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.playCircle} >

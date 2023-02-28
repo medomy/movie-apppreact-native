@@ -10,8 +10,10 @@ import Utils from '../../utils/filterMovies'
 import MovieNetwork from '../../services/movies'
 import GenresNetwork from '../../services/genres'
 import AsyncStorageCache from '../../services/asyncstorageCache'
+import { useFavs } from '../../hooks/useFavs'
 
 const HomeScreen = () => {
+  useFavs();
   // states for genres and refresh control
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
@@ -58,7 +60,7 @@ const HomeScreen = () => {
     <ScrollView
       style={{ flex: 1, backgroundColor: COLORS.primary }}
       refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} colors={[COLORS.primary, COLORS.tintColor]}
-       />}
+      />}
     >
       <HomeHeader />
       <SearchInitializer />

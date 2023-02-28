@@ -16,12 +16,12 @@ const MovieDetailsComponent = () => {
     const params = route.params as RouteParams;
     const movie = useFetchDetails(params.movieId);
     useEffect(() => {
-        console.log(movie)
+        console.log(movie?.id);
     }, [movie])
     return (
         <>
             <ScrollView style={{ flex: 1, backgroundColor: COLORS.primary }}>
-                <PosterBackground imgPath={movie ? movie!.backdrop_path : null} movieId={movie ? movie!.id : 0} />
+                {movie && <PosterBackground imgPath={movie ? movie!.backdrop_path : null} movieId={movie!.id} />}
                 {movie && <InfoSec title={movie.title}
                     rating={Number(movie.vote_average.toFixed(1))}
                     vote_rate={Number(movie.vote_average.toFixed(1))}

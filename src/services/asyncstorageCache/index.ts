@@ -96,6 +96,25 @@ class AsyncStorageCache {
             throw new Error(`could not set movies , ${err}`);
         }
     }
+
+    // for towatch movies part
+
+    static async getToWatchMoviesAsyncStorage(): Promise<number[] | null> {
+        try {
+            const moviesStringified = await AsyncStorage.getItem(asyncStorageKeys.TOWATCHSTOREDMOVIES_STORE);
+            return moviesStringified ? JSON.parse(moviesStringified) : null;
+        } catch (err) {
+            throw new Error(`could not get movies, ${err}`)
+        }
+    }
+
+    static async setToWatchMoviesAsyncStorage(ids: number[]) {
+        try {
+            await AsyncStorage.setItem(asyncStorageKeys.TOWATCHSTOREDMOVIES_STORE, JSON.stringify(ids));
+        } catch (err) {
+            throw new Error(`could not set movie, ${err}`)
+        }
+    }
 }
 
 export default AsyncStorageCache;
