@@ -3,6 +3,9 @@ import React from 'react'
 import { COLORS, SIZES, images } from '../../../constants'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
+import { BlurView } from '@react-native-community/blur'
+// try to understand blurView more in the future...
+
 type props = {
     imgPath: string | null,
     movieId: number
@@ -16,13 +19,28 @@ const PosterBackground = ({ imgPath, movieId }: props) => {
             resizeMode='stretch'>
             <View style={styles.heder}>
                 <TouchableOpacity style={styles.iconCircle} onPress={() => navigation.goBack()}>
-                    <Icon name='ios-close-circle-outline' size={SIZES.iconSize2} color={COLORS.white} />
+                    <BlurView
+                        blurType='light'
+                        blurAmount={40}
+                        reducedTransparencyFallbackColor="white"
+                        blurRadius={25} />
+                    <Icon name='ios-close-circle-outline' size={1.5 * SIZES.iconSize2} color={COLORS.white} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.iconCircle}>
-                    <Icon name='bookmark-outline' size={SIZES.iconSize2} color={COLORS.white} />
+                    <BlurView
+                        blurType='light'
+                        blurAmount={40}
+                        blurRadius={25}
+                        reducedTransparencyFallbackColor="white" />
+                    <Icon name='bookmark-outline' size={1.5 * SIZES.iconSize2} color={COLORS.white} />
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={styles.playCircle} >
+                <BlurView
+                    blurType='light'
+                    blurAmount={80}
+                    blurRadius={25}
+                    reducedTransparencyFallbackColor="white" />
                 <Icon name='play' size={2 * SIZES.iconSize} color={COLORS.white} />
             </TouchableOpacity>
         </ImageBackground>
@@ -43,10 +61,10 @@ const styles = StyleSheet.create({
     },
     iconCircle: {
         backgroundColor: COLORS.white,
-        opacity: 0.6,
-        width: 30,
-        height: 30,
-        borderRadius: 15,
+        opacity: 0.4,
+        width: 40,
+        height: 40,
+        borderRadius: 20,
         justifyContent: "center",
         alignItems: "center"
     },

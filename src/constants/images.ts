@@ -4,11 +4,13 @@
 // export const windImg = require('../../assets/images/wind-free.png');
 export const profilePic = require('../../assets/images/profile.jpeg');
 export const movie_pic = require('../../assets/images/movie_pic.jpg');
+export const rate_pic = require('../../assets/images/rate.png');
 export default {
     // sunnyImg,
     // rainyImg,
     // thunderImg,
     // windImg,
     profilePic,
-    movie_pic
+    movie_pic,
+    rate_pic
 }
