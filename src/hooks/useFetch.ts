@@ -34,5 +34,5 @@ export function useFetch() {
         fetchData();
     }, [])
 
-    return { generes, nowPlayingMovies, topRatedMovies, popularMovies, upcomingMovies };
+    return { generes, nowPlayingMovies, topRatedMovies, popularMovies, upcomingMovies, setGeneres, setNowPlayingMovies, setPopularMovies, setTopRatedMovies, setUpcomingMovies };
 }
