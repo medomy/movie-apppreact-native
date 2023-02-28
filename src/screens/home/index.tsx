@@ -12,9 +12,12 @@ import GenresNetwork from '../../services/genres'
 import AsyncStorageCache from '../../services/asyncstorageCache'
 
 const HomeScreen = () => {
+  // states for genres and refresh control
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
+  // fetch data custom hook call
   const { generes, nowPlayingMovies, upcomingMovies, topRatedMovies, popularMovies, setGeneres, setNowPlayingMovies, setPopularMovies, setTopRatedMovies, setUpcomingMovies } = useFetch();
+  // the on refresh function that reloads and sets entities 
   const onRefresh = useCallback(async () => {
     try {
       setRefresh(true);
@@ -54,7 +57,8 @@ const HomeScreen = () => {
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: COLORS.primary }}
-      refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} colors={[COLORS.primary, COLORS.tintColor]} />}
+      refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} colors={[COLORS.primary, COLORS.tintColor]}
+       />}
     >
       <HomeHeader />
       <SearchInitializer />

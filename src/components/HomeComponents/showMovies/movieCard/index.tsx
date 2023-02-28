@@ -2,13 +2,20 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Movie } from '../../../../types/movie'
 import { COLORS, FONTS, SIZES, images } from '../../../../constants'
+import { useNavigation } from '@react-navigation/native'
 
 type props = {
     movie: Movie
 }
 const MovieCard = ({ movie }: props) => {
+    const navigation = useNavigation();
+    const navigateToDetails = () => {
+        navigation.navigate("details" as never, {
+            movieId: movie.id
+        } as never);
+    }
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={navigateToDetails}>
             <Image
                 style={styles.img}
                 source={movie.poster_path ? { uri: `https://image.tmdb.org/t/p/w200/${movie.poster_path}` } : images.movie_pic}

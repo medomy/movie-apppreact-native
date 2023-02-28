@@ -1,4 +1,5 @@
 import networkInstance from "../network";
+import { MovieDetailed } from "../types/mevieDetailed";
 import { Movie } from "../types/movie";
 import AsyncStorageCache from "./asyncstorageCache";
 
@@ -61,7 +62,7 @@ class MovieNetwork {
         }
     }
 
-    static async getMovieById(id: number): Promise<Movie> {
+    static async getMovieById(id: number): Promise<MovieDetailed> {
         try {
             const MovieData = await networkInstance.get(`/movie/${id}`);
             return MovieData.data;

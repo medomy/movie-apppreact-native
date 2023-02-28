@@ -4,21 +4,27 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../screens/home';
 import BottomTabBarMain from './bottomTabs';
+import MovieDetailsComponent from '../screens/details';
 
 const StackNavigator = createNativeStackNavigator();
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <StackNavigator.Navigator initialRouteName='root' screenOptions={({route , navigation})=>(
+      <StackNavigator.Navigator initialRouteName='root' screenOptions={({ route, navigation }) => (
         {
-            headerShown : false
+          headerShown: false
         }
       )}>
-        <StackNavigator.Screen name='root' component={BottomTabBarMain} options={({route , navigation})=>(
-            {
+        <StackNavigator.Screen name='root' component={BottomTabBarMain} options={({ route, navigation }) => (
+          {
 
-            }
-        )}/>
+          }
+        )} />
+        <StackNavigator.Screen name='details' component={MovieDetailsComponent} options={({ route, navigation }) => (
+          {
+
+          }
+        )} />
       </StackNavigator.Navigator>
     </NavigationContainer>
   )

@@ -19,7 +19,7 @@
             "vote_count": 626
         }
 */
-export type Movie = {
+export interface Movie {
     adult: boolean,
     backdrop_path: string | null,
     genre_ids: number[],
