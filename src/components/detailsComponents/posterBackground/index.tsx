@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View, ToastAndroid } from 'react-native'
 import React, { useCallback } from 'react'
 import { COLORS, SIZES, images } from '../../../constants'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -29,12 +29,13 @@ const PosterBackground = ({ imgPath, movieId }: props) => {
                 dispatch(addToList(movieId));
                 //await AsyncStorageCache.setToWatchMoviesAsyncStorage(favs_ids);
                 console.log("added", favs_ids);
+                ToastAndroid.show("added to to-watch list successfuly", ToastAndroid.SHORT)
             }
             else {
                 dispatch(removeFromList(movieId));
                 //await AsyncStorageCache.setToWatchMoviesAsyncStorage(favs_ids);
                 console.log("removed", favs_ids);
-
+                ToastAndroid.show("removed from to to-watch list successfuly", ToastAndroid.SHORT)
             }
         } catch (err) {
             console.warn(err);
