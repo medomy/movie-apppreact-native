@@ -18,7 +18,7 @@ const CategoriesList = ({ genres, selectCategory }: props) => {
             <CategoryCard genre={item} onPress={chooseCategory} />
         )
     }, [genres])
-    console.log(genres);
+    
     return (
         <View style={styles.container}>
             <ListsHeader title={"Categories"} />

@@ -22,7 +22,6 @@ const PosterBackground = ({ imgPath, movieId }: props) => {
 
     const addOrRemoveTowatch = useCallback(async () => {
         try {
-            console.log(movieId);
             // dispatch(setList([]));
             // await AsyncStorageCache.setToWatchMoviesAsyncStorage([]);
             if (!Utils.isAddedToWatchList(favs_ids, movieId)) {

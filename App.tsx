@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { PropsWithChildren } from 'react';
 import {
   SafeAreaView,
@@ -28,6 +28,7 @@ import Navigation from './src/navigation';
 import { COLORS } from './src/constants';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
+import SplashScreen from 'react-native-splash-screen';
 
 
 function App(): JSX.Element {
@@ -36,6 +37,10 @@ function App(): JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, [])
 
   return (
     <Provider store={store}>

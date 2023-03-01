@@ -8,7 +8,6 @@ type props = {
     onPress: (genreId: number) => void
 }
 const CategoryCard = ({ genre, onPress }: props) => {
-    console.log(genre);
     return (
         <TouchableOpacity style={styles.card} onPress={() => onPress(genre.id)}>
             <Text style={styles.txt}>{genre.name}</Text>

@@ -10,9 +10,9 @@ const SearchScreen = () => {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const { searchedMovies, searchKeys } = useSearchMovies(searchQuery);
 
-    useEffect(() => {
-        console.log("from screen", searchQuery);
-    }, [searchQuery])
+    // useEffect(() => {
+    //     console.log("from screen", searchQuery);
+    // }, [searchQuery])
     return (
         <View style={{ flex: 1, backgroundColor: COLORS.primary }}>
             <SearchHeader />

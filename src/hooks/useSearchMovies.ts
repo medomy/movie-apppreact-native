@@ -19,7 +19,6 @@ export function useSearchMovies(searchQuery: string) {
     }
 
     useEffect(() => {
-        console.log("from hook",searchQuery);
         search();
     }, [searchQuery])
     return { searchedMovies, searchKeys };

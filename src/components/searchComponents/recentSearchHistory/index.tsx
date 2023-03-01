@@ -7,7 +7,6 @@ type props = {
     chooseKey: (key: string) => void
 }
 const RecentSearchComponent = ({ searchKeys, chooseKey }: props) => {
-    console.log(searchKeys);
 
     const listRenderer: ListRenderItem<string> = useCallback(({ item }) => {
         return (

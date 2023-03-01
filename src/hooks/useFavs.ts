@@ -11,7 +11,6 @@ export function useFavs() {
     async function workWithData() {
         try {
             const favs_ids = await AsyncStorageCache.getToWatchMoviesAsyncStorage();
-            console.log(favs_ids);
             if (favs_ids) dispatch(setList(favs_ids));
         } catch (err) {
             console.warn(err);

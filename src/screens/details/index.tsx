@@ -15,9 +15,9 @@ const MovieDetailsComponent = () => {
     const route = useRoute();
     const params = route.params as RouteParams;
     const movie = useFetchDetails(params.movieId);
-    useEffect(() => {
-        console.log(movie?.id);
-    }, [movie])
+    // useEffect(() => {
+    //     console.log(movie?.id);
+    // }, [movie])
     return (
         <>
             <ScrollView style={{ flex: 1, backgroundColor: COLORS.primary }}>

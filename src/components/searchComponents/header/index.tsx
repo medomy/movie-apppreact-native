@@ -9,8 +9,7 @@ const SearchHeader = () => {
     const navigation = useNavigation();
     return (
         <View style={styles.header}>
-            <TouchableOpacity style={styles.iconCircle} onPress={async () => {
-                await AsyncStorageCache.removeAllSearchKeys();
+            <TouchableOpacity style={styles.iconCircle} onPress={() => {
                 navigation.goBack()
             }}>
                 <Icon name='ios-close-circle-outline' size={1.5 * SIZES.iconSize2} color={COLORS.white} />

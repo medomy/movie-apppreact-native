@@ -11,6 +11,7 @@ import MovieNetwork from '../../services/movies'
 import GenresNetwork from '../../services/genres'
 import AsyncStorageCache from '../../services/asyncstorageCache'
 import { useFavs } from '../../hooks/useFavs'
+import CategoryNotFound from '../../components/HomeComponents/categoryNotFound'
 
 const HomeScreen = () => {
   useFavs();
@@ -65,10 +66,18 @@ const HomeScreen = () => {
       <HomeHeader />
       <SearchInitializer />
       <CategoriesList genres={generes} selectCategory={(id) => setSelectedGenre(id)} />
-      <MoviesList headerTitle={'Now Playing Movies'} movies={Utils.filterMovies(nowPlayingMovies, selectedGenre)} />
-      <MoviesList headerTitle={'Top Rated'} movies={Utils.filterMovies(topRatedMovies, selectedGenre)} />
-      <MoviesList headerTitle='Popular Movies' movies={Utils.filterMovies(popularMovies, selectedGenre)} />
-      <MoviesList headerTitle='Upcoming Movies' movies={Utils.filterMovies(upcomingMovies, selectedGenre)} />
+      {Utils.filterMovies(nowPlayingMovies, selectedGenre).length > 0 ?
+        <MoviesList headerTitle={'Now Playing Movies'} movies={Utils.filterMovies(nowPlayingMovies, selectedGenre)} /> :
+        <CategoryNotFound />}
+      {Utils.filterMovies(topRatedMovies, selectedGenre).length ?
+        <MoviesList headerTitle={'Top Rated'} movies={Utils.filterMovies(topRatedMovies, selectedGenre)} /> :
+        <CategoryNotFound />}
+      {Utils.filterMovies(popularMovies, selectedGenre).length ?
+        <MoviesList headerTitle='Popular Movies' movies={Utils.filterMovies(popularMovies, selectedGenre)} /> :
+        <CategoryNotFound />}
+      {Utils.filterMovies(upcomingMovies, selectedGenre).length ?
+        <MoviesList headerTitle='Upcoming Movies' movies={Utils.filterMovies(upcomingMovies, selectedGenre)} /> :
+        <CategoryNotFound />}
     </ScrollView>
   )
 }
