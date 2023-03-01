@@ -9,6 +9,7 @@ class MovieNetwork {
         UPCOMING_PATH: "/movie/upcoming",
         TOPRATED_PATH: "/movie/top_rated",
         POPULAR_PATH: "/movie/popular",
+        SEARCH_PATH: "/search/movie"
     };
     private static async getMoviesByPath(path: string) {
         try {
@@ -68,6 +69,20 @@ class MovieNetwork {
             return MovieData.data;
         } catch (err) {
             throw new Error(`could not get movie ${id} , ${err}`);
+        }
+    }
+
+    static async getSearchedMovies(query: string): Promise<Movie[]> {
+        try {
+            const searchData = await networkInstance.get(this.PathsConfig.SEARCH_PATH, {
+                params: {
+                    query
+                }
+            });
+            return searchData.data.results;
+        } catch (err) {
+            throw new Error(`could not get movies , ${err}`);
+
         }
     }
 }

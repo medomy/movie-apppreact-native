@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../screens/home';
 import BottomTabBarMain from './bottomTabs';
 import MovieDetailsComponent from '../screens/details';
+import SearchScreen from '../screens/searchScreen';
 
 const StackNavigator = createNativeStackNavigator();
 const Navigation = () => {
@@ -21,6 +22,11 @@ const Navigation = () => {
           }
         )} />
         <StackNavigator.Screen name='details' component={MovieDetailsComponent} options={({ route, navigation }) => (
+          {
+
+          }
+        )} />
+        <StackNavigator.Screen name='search' component={SearchScreen} options={({ route, navigation }) => (
           {
 
           }

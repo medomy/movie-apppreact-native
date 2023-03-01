@@ -2,11 +2,13 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS, SIZES } from '../../../constants'
 import Icon from 'react-native-vector-icons/Octicons'
+import { useNavigation } from '@react-navigation/native'
 
 const SearchInitializer = () => {
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.searchView}>
+            <TouchableOpacity style={styles.searchView} onPress={() => navigation.navigate("search" as never)}>
                 <Icon name='search' size={SIZES.iconSize2} color={COLORS.darkgray} />
                 <Text style={styles.searchTxt}>Search movies...</Text>
             </TouchableOpacity>
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
     },
     searchView: {
         width: SIZES.fullWidth,
-        paddingHorizontal:1.5* SIZES.padding,
+        paddingHorizontal: 1.5 * SIZES.padding,
         paddingVertical: SIZES.padding2,
         flexDirection: "row",
         alignItems: "center",

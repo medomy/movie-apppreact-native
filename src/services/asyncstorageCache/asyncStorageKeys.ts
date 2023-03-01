@@ -4,5 +4,6 @@ export const asyncStorageKeys = {
     UPCOMINGMOVIES_STORE: "upcomingMoviesStore",
     TOPRATEDMOVIES_STORE: "topRatedMoviesStore",
     POPULARMOVIES_STORE: "popularMoviesStore",
-    TOWATCHSTOREDMOVIES_STORE: "toWatchStore"
+    TOWATCHSTOREDMOVIES_STORE: "toWatchStore",
+    SEARCH_HISTORY_STORE: "searchHistoryWords"
 }

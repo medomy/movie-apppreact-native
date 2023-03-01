@@ -115,6 +115,33 @@ class AsyncStorageCache {
             throw new Error(`could not set movie, ${err}`)
         }
     }
+
+    // for search keys
+
+    static async getSearchKeysAsyncStorage() {
+        try {
+            const searchKeysString = await AsyncStorage.getItem(asyncStorageKeys.SEARCH_HISTORY_STORE);
+            return searchKeysString ? JSON.parse(searchKeysString) : null;
+        } catch (err) {
+            throw new Error(`${err}`)
+        }
+    }
+
+    static async setSearchKeysAsyncStorage(key: string) {
+        try {
+            const searchKeys: string[] | null = await this.getSearchKeysAsyncStorage();
+            if (searchKeys && searchKeys.length === 5) {
+                searchKeys.shift();
+            }
+            if (searchKeys) {
+                searchKeys.push(key);
+                await AsyncStorage.setItem(asyncStorageKeys.SEARCH_HISTORY_STORE, JSON.stringify(searchKeys));
+            }
+            else if (searchKeys == null) await AsyncStorage.setItem(asyncStorageKeys.SEARCH_HISTORY_STORE, JSON.stringify([key]));
+        } catch (err) {
+            throw new Error(`${err}`);
+        }
+    }
 }
 
 export default AsyncStorageCache;
