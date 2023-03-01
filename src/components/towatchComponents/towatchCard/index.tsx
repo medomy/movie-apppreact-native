@@ -50,7 +50,7 @@ const ToWatchCard = ({ movie_id, searchMovie }: props) => {
             <>
                 {searchMovie ? <TouchableOpacity style={styles.card} onPress={() => {
                     navigation.navigate("details" as never, {
-                        movieId: movie_id
+                        movieId: searchMovie.id
                     } as never)
                 }}>
                     <Image
