@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Movie } from "../types/movie";
 import AsyncStorageCache from "../services/asyncstorageCache";
 import MovieNetwork from "../services/movies";
@@ -17,5 +17,10 @@ export function useSearchMovies(searchQuery: string) {
             console.error(err);
         }
     }
+
+    useEffect(() => {
+        console.log("from hook",searchQuery);
+        search();
+    }, [searchQuery])
     return { searchedMovies, searchKeys };
 }

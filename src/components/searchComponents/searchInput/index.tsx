@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { COLORS, SIZES } from '../../../constants';
-import _ from 'lodash';
+import { debounce } from 'lodash';
 import RecentSearchComponent from '../recentSearchHistory';
 type props = {
     sendSearchVal: (val: string) => void,
@@ -12,13 +12,26 @@ const SearchInput = ({ sendSearchVal, searchKeys }: props) => {
     const [searchTxt, setSearchTxt] = useState<string>("");
 
     const changeTxt = (txt: string) => {
+        if (txt.length === 0) setShowRecentKeys(true);
+        else setShowRecentKeys(false);
+        //sendSearchVal(txt);
+        // console.log(showRecentKeys, txt);
+        setSearchTxt(txt)
+    }
+
+    // wait for txt and then call the function
+    const debouncedSetter = useCallback(debounce(changeTxt, 500), []);
+
+    const onFocus = () => {
+        setShowRecentKeys(true);
+    }
+    const onBlur = () => {
         setShowRecentKeys(false);
-        _.debounce(() => {
-            setSearchTxt(txt);
-        }, 500, { maxWait: 2000 })
     }
 
     useEffect(() => {
+        if (searchTxt.length === 0) setShowRecentKeys(true);
+        else setShowRecentKeys(false);
         sendSearchVal(searchTxt);
     }, [
         searchTxt
@@ -27,14 +40,14 @@ const SearchInput = ({ sendSearchVal, searchKeys }: props) => {
         <View style={styles.container}>
             <TextInput
                 style={styles.input}
-                onChangeText={changeTxt}
-                value={searchTxt}
-                onFocus={() => setShowRecentKeys(true)}
-                onBlur={() => setShowRecentKeys(false)}
+                onChangeText={debouncedSetter}
+                defaultValue={searchTxt}
+                onFocus={onFocus}
+                //onBlur={onBlur}
                 placeholder='search for a movie'
                 keyboardType="default"
             />
-            {showRecentKeys && <RecentSearchComponent searchKeys={searchKeys} chooseKey={(key) => setSearchTxt(key)} />}
+            {showRecentKeys && <RecentSearchComponent searchKeys={searchKeys ?? []} chooseKey={(key) => setSearchTxt(key)} />}
         </View>
     )
 }

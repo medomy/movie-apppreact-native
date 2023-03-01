@@ -3,12 +3,16 @@ import React from 'react'
 import { COLORS, SIZES } from '../../../constants'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorageCache from '../../../services/asyncstorageCache'
 
 const SearchHeader = () => {
     const navigation = useNavigation();
     return (
         <View style={styles.header}>
-            <TouchableOpacity style={styles.iconCircle} onPress={() => navigation.goBack()}>
+            <TouchableOpacity style={styles.iconCircle} onPress={async () => {
+                await AsyncStorageCache.removeAllSearchKeys();
+                navigation.goBack()
+            }}>
                 <Icon name='ios-close-circle-outline' size={1.5 * SIZES.iconSize2} color={COLORS.white} />
             </TouchableOpacity>
         </View>

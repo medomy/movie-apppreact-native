@@ -7,6 +7,7 @@ type props = {
     chooseKey: (key: string) => void
 }
 const RecentSearchComponent = ({ searchKeys, chooseKey }: props) => {
+    console.log(searchKeys);
 
     const listRenderer: ListRenderItem<string> = useCallback(({ item }) => {
         return (
@@ -16,13 +17,13 @@ const RecentSearchComponent = ({ searchKeys, chooseKey }: props) => {
                 </Text>
             </TouchableOpacity>
         )
-    }, [searchKeys])
+    }, [])
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Recent :</Text>
             <FlatList
                 style={{ marginVertical: SIZES.margin }}
-                data={searchKeys}
+                data={searchKeys.reverse()}
                 renderItem={listRenderer}
                 keyExtractor={(item) => item} />
         </View>
